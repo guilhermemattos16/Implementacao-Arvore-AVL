@@ -32,6 +32,5 @@ struct node *sucessor(struct node *x);
 void troca(struct node *u, struct node *v);
 void remocao(struct node *z);
 void remocao_fixup(struct node *x);
-int compara (void* x, void* y);
 
 #endif

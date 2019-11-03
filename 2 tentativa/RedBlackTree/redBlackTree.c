@@ -1,9 +1,7 @@
 #include "redBlackTree.h"
 
 
-int compara (void *x, void *y){
-	return (int)((int*)x - (int*)y);
-}
+
 
 void imprimir(struct node *x){
 
