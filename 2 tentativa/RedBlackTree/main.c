@@ -1,5 +1,9 @@
 #include "redBlackTree.h"
 
+int compara (void *x, void *y){
+	return (int)((int*)x - (int*)y);
+}
+
 int main(){
 	NILL = malloc(sizeof(struct node));
 	NILL->cor = BLACK;   
