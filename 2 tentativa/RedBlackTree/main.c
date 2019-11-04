@@ -2,7 +2,7 @@
 
 int main(){
 	NILL = malloc(sizeof(struct node));
-	NILL->color = BLACK;   
+	NILL->cor = BLACK;   
 
 	ROOT = NILL;
 	
