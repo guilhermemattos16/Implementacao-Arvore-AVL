@@ -11,7 +11,34 @@ Ciencia da Computacao - Estrutura de Dados II
 #include <malloc.h>
 #include <string.h>
 #define ORDEM 2 //árvore de ordem 2
-#define namefile "_arquivo.dat"
+
+typedef long TipoChave;
+typedef struct Registro
+{
+    TipoChave Chave;
+    // Outros Componentes
+} Registro;
+
+
+typedef struct Pagina* Apontador;
+typedef struct Pagina
+{
+    char n;
+    Registro r[ORDEM];
+    Apontador p[ORDEM + 1];
+} Pagina;
+
+typedef struct Tabela {
+Registro Item[ORDEM + 1];
+    int n;
+} Tabela;
+
+
+
+
+
+
+
 
 
 int cont = -1, count = 0;
@@ -54,44 +81,50 @@ typedef struct pagina
 } Pagina;
 
 
-void buscaB (Pagina pt, // Página a ser analisada 
-            int x,      // Chave procurada
-            int f,      // 
-            int g) {
-    Pagina p;
-    int m;
+
+
+
+
+
+
+// void buscaB (Pagina* pt, // Página a ser analisada 
+//             int x,      // Chave procurada
+//             int f,      // 
+//             int g) {
+//     Pagina *p;
+//     int m;
     
-    p = pt; 
-    pt = pt; 
-    f = 0;
-    while (p != NULL)
-    {
-        int i = g = 1; 
-        pt = p; 
-        m = p -> m;
+//     p = pt; 
+//     pt = pt; 
+//     f = 0;
+//     while (p != NULL)
+//     {
+//         int i = g = 1; 
+//         pt = p; 
+//         m = p -> m;
     
-        while (i <= m) {
-            if(x > p -> s[i]) { 
-                i = g = i + 1;
-            }
-            else
-            {
-                if(x = p -> s [i]) {
-                    p = NULL; 
-                    f = 1 ;
-                }
-                else { 
-                    p = p -> pont[i-1] ;
-                }
-                i = m + 2 ;
-            }
-        }
-        if (i= m + 1)
-        {
-            p = p -> pont[m];
-        }
-    }
-}
+//         while (i <= m) {
+//             if(x > p -> s[i]) { 
+//                 i = g = i + 1;
+//             }
+//             else
+//             {
+//                 if(x = p -> s [i]) {
+//                     p = NULL; 
+//                     f = 1 ;
+//                 }
+//                 else { 
+//                     p = p -> pont[i-1] ;
+//                 }
+//                 i = m + 2 ;
+//             }
+//         }
+//         if (i= m + 1)
+//         {
+//             p = p -> pont[m];
+//         }
+//     }
+// }
 
 
 void Busca(k, ponteiroRaiz)
@@ -106,25 +139,26 @@ void Busca(k, ponteiroRaiz)
         //carrega em memoria primaria pagina apontado por ponteiroRaiz
         //procura k na pagina carregada
         
-        if () //k foi encontrada
+        // if () //k foi encontrada
         {
             return printf("chave encontrada");
         }
-        else
-        {
+        //else
+        //{
             //ponteiro = ponteiro para a próxima página da possível ocorrência de k
-            return (Busca (k, ponteiro));
-        }
+            // return (Busca (k, ponteiro));
+        //}
     }
 }
 
-void emOrdem (tpaginaB raiz) {
-    if(raiz==NULL)
-        return;
+// void emOrdem (tpaginaB raiz) {
+//     if(raiz==NULL)
+//         return;
  
-    for(int i=0; i < raiz.n, i++) {
-        emOrdem(raiz -> pont[i]);
-        printf("%i",raiz -> chv[i]);
-    }
-    emOrdem(raiz -> pont[raiz.n]);
-}
+//     for(int i=0; i < raiz.n, i++) {
+//         emOrdem(raiz -> pont[i]);
+//         printf("%i",raiz -> chv[i]);
+//     }
+//     emOrdem(raiz -> pont[raiz.n]);
+// }
+
