@@ -7,124 +7,15 @@ Ciencia da Computacao - Estrutura de Dados II
 */
 
 #include "arvoreB.h"
-void ImprimeI(Apontador p, int nivel)
-{ 
-    long i;
-    if (p == NULL) return;
-    printf("Nivel %d : ", nivel);
-    for (i = 0; i < p->n; i++) {
-        printf("%d ", p->r[i].Chave);
-    }
-    
-    putchar('\n');
-    nivel++;
-    
-    for (i = 0; i <= p->n; i++) {
-        ImprimeI(p->p[i], nivel);
-    }
-} 
-
-void Imprime(Apontador p)
-{   int  n = 0; 
-    ImprimeI(p, n); 
-} 
-
-// void imprimir(Apontador p){
-
-// 	if(x != NILL){
-//         printf("%d - %d\t", x->chave, x->cor);
-// 		imprimir(x->esq);		
-// 		imprimir(x->dir);
-// 	}
-// }
-
-void percorreB (Apontador r)
-// recebe um apontador para uma B-árvore e imprime a chave de todas as suas células
-{
-  int i;
-  if (r != NULL)
-  {
-    for (i = 0; i < (2*ORDEM); i++)
-    {
-      percorreB (r->p[i]);
-      printf ("%d ", r->r[i]);
-    }
-    percorreB (r->p[2*ORDEM]);
-  }
-}
-
-void TestaI(Apontador p, int pai, short direita)
-{   int i;
-    int antecessor = 0;
-    
-    if (p == NULL) return;
-    
-    if (p->r[0].Chave > pai && direita == FALSE) 
-    {   
-        printf("Erro: filho %12ld maior que pai %d\n", p->r[0].Chave, pai);
-        return;
-    }
-    for (i = 0; i < p->n; i++) 
-    {   if (p->r[i].Chave <= antecessor) 
-        { 
-            printf("Erro: irmao %ld maior que irmao a esquerda %d\n", (long)p->r[i].Chave, antecessor);
-            return;
-        }
-        antecessor = p->r[i].Chave;
-    }
-    for (i = 0; i < p->n; i++) 
-        TestaI(p->p[i], p->r[i].Chave, FALSE);
-    TestaI(p->p[p->n], p->r[i].Chave, TRUE);
-}
-
-void Testa(Apontador p)
-{   int i;
-    if (p == NULL) return;
-    for (i = 0; i < p->n; i++) 
-        TestaI(p->p[i], p->r[i].Chave, FALSE);
-    TestaI(p->p[p->n], p->r[i].Chave, TRUE);
-}
-
-// int main(int argc, char *argv[])
-// {   
-//     Registro x;
-//     Pagina *D;
-//     Inicializa(&D);
-
-
-//     printf("Chave: ");
-//     scanf("%ld%*[^\n]", &x.Chave);
-//     getchar();
-//     while (x.Chave != 0) 
-//     {   Insere(x, &D);
-//         Imprime(D); 
-//         printf("Chave: ");
-//         scanf("%ld%*[^\n]", &x.Chave);
-//         getchar();
-//     }
-//     Testa(D);
-//     printf("Chave: ");
-//     scanf("%ld%*[^\n]", &x.Chave);
-//     getchar();
-//     while (x.Chave != 0) 
-//     {   Retira(x.Chave, &D);
-//         Imprime(D);
-//         printf("Chave: ");
-//         scanf("%ld%*[^\n]", &x.Chave);
-//         getchar();
-//     }
-//     Testa(D);
-//     return 0;
-// }
-
 
 int main(){
-    Registro x;
-    Pagina *Dicionario;
-	int opcao;
+    Artigo art;
+    Pagina *Pag;
+    Inicializa(&Pag);
+	int opcao, id, bool;
 
-    Inicializa(&Dicionario);
     do{
+        system("clear || cls");
         printf("\n 1 - Inserir\n 2 - Busca\n 3 - Remover\n 4 - Imprimir\n 5 - Sair\n\n");
         printf("Escolha uma opção: ");
         scanf("%d", &opcao);
@@ -132,23 +23,50 @@ int main(){
         switch (opcao)
         {
         case 1:
-            printf("Digite o valor da chave para inserção: ");
-            scanf("%d", &x.Chave);
-            Insere(x, &Dicionario);
+            printf("Informe id: ");
+            scanf("%d", &art.id);
+            setbuf(stdin, NULL);
+            printf("Informe ano: ");
+            scanf("%d", &art.ano);
+            setbuf(stdin, NULL);
+            printf("Autor: ");
+            fgets(art.autor, 200, stdin);
+            printf("Titulo: ");
+            fgets(art.titulo, 200, stdin);
+            printf("Revista: ");
+            fgets(art.revista, 200, stdin);
+            printf("DOI: ");
+            fgets(art.DOI, 20, stdin);
+            printf("Palavra Chave: ");
+            fgets(art.palavraChave, 200, stdin);
+            Insere(art, &Pag);
+            printf("Pressione enter para continuar");
+            getchar();
             break;
         case 2:
-            printf("Digite o valor da chave para buscar: ");
-            scanf("%d", &x.Chave);
-            // printf((Pesquisa(x.Chave, Dicionario) == NULL) ? "Valor não encontrado\n" : "%d\n", Pesquisa(x.Chave, Dicionario)->chave);
+            printf("Digite o id do artigo procurado: ");
+            scanf("%d", &id);
+            Pesquisa(id, Pag);
+            if(bool == FALSE){
+                printf("Artigo nao encontrado");
+            }
+            printf("Pressione enter para continuar");
+            getchar();
+            getchar();
             break;
         case 3:
-            printf("Digite o valor da chave para remover: ");
-            scanf("%d", &x.Chave);
-            Retira(x.Chave, &Dicionario);
+            printf("Digite o id do artigo a ser removido: ");
+            scanf("%d", &id);
+            Retira(id, &Pag);
+            printf("Pressione enter para continuar");
+            getchar();
+            getchar();
             break;
         case 4:
-            // Imprime(Dicionario);
-            percorreB(Dicionario);
+            Imprime(Pag);
+            printf("Pressione enter para continuar");
+            getchar();
+            getchar();
             break;
         
         default:
